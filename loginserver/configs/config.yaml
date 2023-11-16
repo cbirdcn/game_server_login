@@ -1,0 +1,19 @@
+server:
+  http:
+    addr: 0.0.0.0:8000
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0:9000
+    timeout: 1s
+data:
+  database:
+    driver: mysql
+    source: root:root@tcp(host.docker.internal:3307)/test
+  redis:
+    addr: host.docker.internal:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+  mongodb:
+    # addr: mongodb://admin:admin@host.docker.internal:27017?maxPoolSize=10&minPoolSize=2&maxConnecting=2&w=mojority
+    addr: mongodb://admin:admin@172.21.0.15:27017/
+    

@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package api.loginserver;
+
+option go_package = "loginserver/api/loginserver;loginserver";
+
+// 只提供给玩家的service（不包含backoffice请求）
+service Account {
+	rpc CreateAccount (CreateAccountRequest) returns (CreateAccountReply);
+	// rpc UpdateAccount (UpdateAccountRequest) returns (UpdateAccountReply);
+	// rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountReply);
+	// rpc GetAccount (GetAccountRequest) returns (GetAccountReply);
+	// rpc ListAccount (ListAccountRequest) returns (ListAccountReply);
+
+	// rpc VerifyPassword (ListAccountRequest) returns (ListAccountReply);
+	rpc LoginAccount (LoginAccountRequest) returns (LoginAccountReply);
+}
+
+// 注册账号
+message CreateAccountRequest {
+	string username = 1;
+	string password = 2;
+	string password2 = 3; // 第二次输入密码
+}
+message CreateAccountReply {
+	string id = 1; // 账号id
+}
+
+// message UpdateAccountRequest {}
+// message UpdateAccountReply {}
+
+// message DeleteAccountRequest {}
+// message DeleteAccountReply {}
+
+// message GetAccountRequest {}
+// message GetAccountReply {}
+
+// message ListAccountRequest {}
+// message ListAccountReply {}
+
+// 登录账号
+message LoginAccountRequest {
+	string username = 1;
+	string password = 2;
+}
+message LoginAccountReply {
+	int32 status = 1; // 登录是否成功
+	// string token = 2; // TODO:第一次登录时下发token
+	// string refresh_token = 4; // TODO:第一次登录时下发刷新token
+}
+
+// TODO:刷新token：提交refreshToken，服务器生成关联的新token下发客户端。
